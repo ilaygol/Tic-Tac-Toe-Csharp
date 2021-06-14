@@ -39,6 +39,11 @@ namespace GameLogic
             return r_Board[i_Position.Row, i_Position.Column].Symbol;
         }
 
+        public BoardCell GetBoardCell(ref Position i_Position)
+        {
+            return r_Board[i_Position.Row, i_Position.Column];
+        }
+
         public void SetSymbol(ref Position i_Position, char i_Symbol)
         {
             r_Board[i_Position.Row, i_Position.Column].Symbol = i_Symbol;

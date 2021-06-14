@@ -13,7 +13,14 @@ namespace UserInterface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameSettingsForm());
+            GameSettingsForm gameSettingsForm = new GameSettingsForm();
+            gameSettingsForm.ShowDialog();
+            GameForm gameForm = new GameForm(
+                gameSettingsForm.GetGameManager,
+                gameSettingsForm.Player1Name,
+                gameSettingsForm.Player2Name);
+            gameForm.ShowDialog();
+
         }
     }
 }

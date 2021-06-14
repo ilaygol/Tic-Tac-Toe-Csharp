@@ -22,8 +22,19 @@ namespace GameLogic
             m_MovesCount = 0;
             r_RandomComputerChoice = new Random();
         }
-        
-        internal Board GameBoard
+
+        public GameManager(int i_RowSize, int i_ColSize, bool i_IsVersusComputer)
+        {
+            const bool v_IsComputer = true;
+            r_Board = new Board(i_RowSize, i_ColSize);
+            m_Player1 = new Player('X', !v_IsComputer);
+            m_Player2 = new Player('O', i_IsVersusComputer);
+            m_CurrentPlayer = m_Player1;
+            m_MovesCount = 0;
+            r_RandomComputerChoice = new Random();
+        }
+
+        private Board GameBoard
         {
             get
             {
@@ -31,11 +42,19 @@ namespace GameLogic
             }
         }
 
-        public int BoardSize
+        public int RowSize
         {
             get
             {
                 return GameBoard.RowSize;
+            }
+        }
+
+        public int ColSize
+        {
+            get
+            {
+                return GameBoard.ColumnSize;
             }
         }
 
@@ -215,6 +234,11 @@ namespace GameLogic
             CurrentPlayer = Player1;
             GameBoard.InitialBoard();
             m_MovesCount = 0;
+        }
+
+        public BoardCell GetBoardCell(Position i_Position)
+        {
+            return GameBoard.GetBoardCell(ref i_Position);
         }
     }
 }

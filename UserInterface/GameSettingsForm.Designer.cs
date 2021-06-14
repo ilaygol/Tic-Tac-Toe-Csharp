@@ -170,6 +170,7 @@ namespace UserInterface
             this.StartButton.TabIndex = 11;
             this.StartButton.Text = "Start!";
             this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // GameSettingsForm
             // 

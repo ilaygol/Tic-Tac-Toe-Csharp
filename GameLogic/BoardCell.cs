@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    internal class BoardCell
+    public class BoardCell
     {
         private readonly Position r_Position;
         private char m_Symbol = ' ';
@@ -33,7 +33,7 @@ namespace GameLogic
             {
                 return m_Symbol;
             }
-            set
+            internal set
             {
                 m_Symbol = value;
             }
