@@ -13,10 +13,10 @@ namespace GameLogic
 
         public event Action<BoardCell> SymbolChanged; 
 
-        public BoardCell(Position i_Position)
+        internal BoardCell(Position i_Position)
         {
             r_Position = i_Position;
-            m_Symbol = ' ';
+            Symbol = ' ';
         }
 
         public Position CellPosition

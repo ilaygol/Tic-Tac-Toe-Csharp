@@ -12,25 +12,21 @@ namespace GameLogic
         private int m_MovesCount;
         private readonly Random r_RandomComputerChoice;
 
-        public event Action PlayerSwitched; 
+        public event Action PlayerSwitched;
 
-        public GameManager(int i_BoardSize, bool i_IsVersusComputer)
-        {
-            const bool v_IsComputer = true;
-            r_Board = new Board(i_BoardSize);
-            m_Player1 = new Player('X', !v_IsComputer);
-            m_Player2 = new Player('O', i_IsVersusComputer);
-            m_CurrentPlayer = m_Player1;
-            m_MovesCount = 0;
-            r_RandomComputerChoice = new Random();
-        }
-
-        public GameManager(int i_RowSize, int i_ColSize, bool i_IsVersusComputer)
+        public GameManager(
+            int i_RowSize,
+            int i_ColSize,
+            bool i_IsVersusComputer,
+            string i_Player1Name,
+            string i_Player2Name)
         {
             const bool v_IsComputer = true;
             r_Board = new Board(i_RowSize, i_ColSize);
             m_Player1 = new Player('X', !v_IsComputer);
+            m_Player1.Name = i_Player1Name;
             m_Player2 = new Player('O', i_IsVersusComputer);
+            m_Player2.Name = i_Player2Name;
             m_CurrentPlayer = m_Player1;
             m_MovesCount = 0;
             r_RandomComputerChoice = new Random();
@@ -60,7 +56,7 @@ namespace GameLogic
             }
         }
 
-        internal Player CurrentPlayer
+        public Player CurrentPlayer
         {
             get
             {
@@ -72,7 +68,7 @@ namespace GameLogic
             }
         }
 
-        internal Player Player1
+        public Player Player1
         {
             get
             {
@@ -80,11 +76,19 @@ namespace GameLogic
             }
         }
 
-        internal Player Player2
+        public Player Player2
         {
             get
             {
                 return m_Player2;
+            }
+        }
+
+        public bool IsVersusComputer
+        {
+            get
+            {
+                return Player2.IsComputer;
             }
         }
 
@@ -150,10 +154,10 @@ namespace GameLogic
             return isRow || isColumn || isSlant;
         }
 
-        //public void PlayerWins(Player i_Winner)
-        //{
-        //    i_Winner.Score++;
-        //}
+        public void CurrentPlayerWins()
+        {
+            CurrentPlayer.Score++;
+        }
 
         public void SwitchCurrentPlayer()
         {
@@ -235,7 +239,7 @@ namespace GameLogic
         public void ResetGameToNewRound()
         {
             CurrentPlayer = Player1;
-            GameBoard.InitialBoard();
+            GameBoard.ResetBoard();
             m_MovesCount = 0;
         }
 
@@ -243,6 +247,7 @@ namespace GameLogic
         {
             return GameBoard.GetBoardCell(ref i_Position);
         }
+
         protected virtual void OnPlayerSwitched()
         {
             PlayerSwitched?.Invoke();

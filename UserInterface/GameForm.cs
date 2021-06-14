@@ -10,7 +10,7 @@ namespace UserInterface
         private static GameManager s_GameManager;
         private readonly CellButton[,] r_CellButtons;
 
-        public GameForm(GameManager i_GameManager, string i_Player1Name, string i_Player2Name)
+        public GameForm(GameManager i_GameManager)
         {
             s_GameManager = i_GameManager;
             r_CellButtons = new CellButton[s_GameManager.RowSize, s_GameManager.ColSize];
@@ -18,17 +18,26 @@ namespace UserInterface
             initializeButtons();
             InitializeComponent();
 
+            s_GameManager.Player1.ScoreChanged += Player1_ScoreChanged;
+            s_GameManager.Player2.ScoreChanged += Player2_ScoreChanged;
+
             this.Height = r_CellButtons[s_GameManager.RowSize - 1, 0].Bottom + 80;
-            //Player1Label.Top = r_CellButtons[s_GameManager.RowSize - 1, 0].Bottom + 30;
-            Player1Label.Text = i_Player1Name;
-            //Player1ScoreLabel.Top = Player1Label.Top;
+            Player1Label.Text = s_GameManager.Player1.Name + ':';
             Player1ScoreLabel.Left = Player1Label.Right + 5;
 
-            //Player2Label.Top = Player1Label.Top;
             Player2Label.Left = Player1ScoreLabel.Right + 20;
-            Player2Label.Text = i_Player2Name;
-            //Player2ScoreLabel.Top = Player1Label.Top;
+            Player2Label.Text = s_GameManager.Player2.Name + ':';
             Player2ScoreLabel.Left = Player2Label.Right + 5;
+        }
+
+        private void Player2_ScoreChanged(int obj)
+        {
+            Player2ScoreLabel.Text = obj.ToString();
+        }
+
+        private void Player1_ScoreChanged(int obj)
+        {
+            Player1ScoreLabel.Text = obj.ToString();
         }
 
         private void s_GameManager_PlayerSwitched()
@@ -76,13 +85,94 @@ namespace UserInterface
         
         private void cellButton_Click(object sender, EventArgs e)
         {
+            bool isGameEnded = false;
             CellButton currentButton = (sender as CellButton);
-            if(currentButton != null)
+            makeAMove(currentButton);
+            isGameEnded = checkGameEnded(currentButton.ButtonBoardCellPosition);
+            if(s_GameManager.IsVersusComputer && !isGameEnded)
             {
-                s_GameManager.SetPositionOnBoard(currentButton.ButtonBoardCellPosition);
-                currentButton.Enabled = false;
+                Position? computerChoice = s_GameManager.GetComputerPositionChoice();
+                if(computerChoice.HasValue)
+                {
+                    makeAMove(r_CellButtons[computerChoice.Value.Row, computerChoice.Value.Column]);
+                    checkGameEnded(computerChoice.Value);
+                }
+            }
+        }
+
+        private void makeAMove(CellButton i_CellButton)
+        {
+            s_GameManager.SetPositionOnBoard(i_CellButton.ButtonBoardCellPosition);
+            i_CellButton.Enabled = false;
+        }
+
+        private bool checkGameEnded(Position i_Position)
+        {
+            bool isTie = false;
+            bool isGameEnded = false;
+
+            isGameEnded = s_GameManager.IsGameEnded(i_Position, out isTie);
+            if (isTie)
+            {
+                showTieMessageBox();
+            }
+            else if (isGameEnded)
+            {
+                s_GameManager.CurrentPlayerWins();
+                showWinnerMessageBox(s_GameManager.CurrentPlayer.Name);
+            }
+            else
+            {
                 s_GameManager.SwitchCurrentPlayer();
             }
+            return isGameEnded || isTie;
+        }
+
+        private void showTieMessageBox()
+        {
+            string headerText = "A Tie!";
+            string innerText = string.Format("Tie!{0}Would you like to play another round?", Environment.NewLine);
+            DialogResult result = MessageBox.Show(innerText, headerText, MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                playAnotherRound();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void showWinnerMessageBox(string i_WinnerName)
+        {
+            string headerText = "A Win!";
+            string innerText = string.Format(
+                "The winner is {0}!{1}Would you like to play another round?",
+                i_WinnerName,
+                Environment.NewLine);
+            DialogResult result = MessageBox.Show(innerText, headerText, MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                playAnotherRound();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void playAnotherRound()
+        {
+            s_GameManager.ResetGameToNewRound();
+            foreach(var cellButton in r_CellButtons)
+            {
+                cellButton.Enabled = true;
+            }
+            Player1Label.Font = new Font(Player1Label.Font, FontStyle.Bold);
+            Player1ScoreLabel.Font = new Font(Player1ScoreLabel.Font, FontStyle.Bold);
+
+            Player2Label.Font = new Font(Player2Label.Font, FontStyle.Regular);
+            Player2ScoreLabel.Font = new Font(Player2ScoreLabel.Font, FontStyle.Regular);
         }
     }
 }

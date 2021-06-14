@@ -1,19 +1,24 @@
-﻿namespace GameLogic
+﻿using System;
+
+namespace GameLogic
 {
-    internal class Player
+    public class Player
     {
         private readonly char r_Symbol;
         private readonly bool r_IsComputer;
         private int m_Score = 0;
+        private string m_Name;
 
-        public Player(char i_Symbol, bool i_IsComputer)
+        public event Action<int> ScoreChanged;
+
+        internal Player(char i_Symbol, bool i_IsComputer)
         {
             r_Symbol = i_Symbol;
             r_IsComputer = i_IsComputer;
             m_Score = 0;
         }
 
-        public char Symbol
+        internal char Symbol
         {
             get
             {
@@ -36,10 +41,29 @@
                 return m_Score;
             }
 
-            set
+            internal set
             {
                 m_Score = value;
+                OnScoreChanged(m_Score);
             }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return m_Name;
+            }
+
+            internal set
+            {
+                m_Name = value;
+            }
+        }
+
+        protected virtual void OnScoreChanged(int i_Obj)
+        {
+            ScoreChanged?.Invoke(i_Obj);
         }
     }
 }

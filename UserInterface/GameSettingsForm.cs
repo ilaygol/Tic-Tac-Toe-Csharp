@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameLogic;
 
@@ -32,7 +25,7 @@ namespace UserInterface
         {
             get
             {
-                string player1Name = "Player 1:";
+                string player1Name = "Player 1";
                 if(Player1TextBox.Text != "")
                 {
                     player1Name = Player1TextBox.Text;
@@ -45,7 +38,7 @@ namespace UserInterface
         {
             get
             {
-                string player2Name = "Computer:";
+                string player2Name = "Computer";
                 if(Player2CheckBox.Checked == true)
                 {
                     player2Name = Player2TextBox.Text;
@@ -78,7 +71,9 @@ namespace UserInterface
             s_GameManager = new GameManager(
                 (int)numericUpDownRows.Value,
                 (int)numericUpDownCols.Value,
-                !Player2CheckBox.Checked);
+                !Player2CheckBox.Checked,
+                Player1Name,
+                Player2Name);
             this.Close();
         }
     }

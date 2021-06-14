@@ -59,5 +59,13 @@ namespace GameLogic
                 }
             }
         }
+
+        public void ResetBoard()
+        {
+            foreach(var boardCell in r_Board)
+            {
+                boardCell.Symbol = ' ';
+            }
+        }
     }
 }

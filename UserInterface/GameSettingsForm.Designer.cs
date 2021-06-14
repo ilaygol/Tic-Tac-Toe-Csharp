@@ -164,6 +164,7 @@ namespace UserInterface
             // 
             // StartButton
             // 
+            this.StartButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.StartButton.Location = new System.Drawing.Point(26, 218);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(277, 35);
