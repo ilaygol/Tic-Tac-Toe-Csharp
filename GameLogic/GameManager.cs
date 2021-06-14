@@ -12,6 +12,8 @@ namespace GameLogic
         private int m_MovesCount;
         private readonly Random r_RandomComputerChoice;
 
+        public event Action PlayerSwitched; 
+
         public GameManager(int i_BoardSize, bool i_IsVersusComputer)
         {
             const bool v_IsComputer = true;
@@ -97,16 +99,16 @@ namespace GameLogic
             return isGood;
         }
 
-        //public bool SetPositionOnBoard(Position i_Position)
-        //{
-        //    bool isGoodPosition = IsGoodPositionChoice(i_Position);
-        //    if(isGoodPosition == true)
-        //    {
-        //        GameBoard.SetValue(ref i_Position, m_CurrentPlayer.Symbol);
-        //        m_MovesCount++;
-        //    }
-        //    return isGoodPosition;
-        //}
+        public bool SetPositionOnBoard(Position i_Position)
+        {
+            bool isGoodPosition = IsGoodPositionChoice(i_Position);
+            if (isGoodPosition == true)
+            {
+                GameBoard.SetSymbol(ref i_Position, m_CurrentPlayer.Symbol);
+                m_MovesCount++;
+            }
+            return isGoodPosition;
+        }
 
         public Position? GetComputerPositionChoice()
         {
@@ -163,6 +165,7 @@ namespace GameLogic
             {
                 CurrentPlayer = Player1;
             }
+            OnPlayerSwitched();
         }
 
         private bool isFullRow(Position i_LastPosition)
@@ -239,6 +242,10 @@ namespace GameLogic
         public BoardCell GetBoardCell(Position i_Position)
         {
             return GameBoard.GetBoardCell(ref i_Position);
+        }
+        protected virtual void OnPlayerSwitched()
+        {
+            PlayerSwitched?.Invoke();
         }
     }
 }

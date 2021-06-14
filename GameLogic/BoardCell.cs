@@ -36,6 +36,7 @@ namespace GameLogic
             internal set
             {
                 m_Symbol = value;
+                OnSymbolChanged(this);
             }
         }
 

@@ -17,10 +17,16 @@ namespace UserInterface
         {
             r_BoardCell = i_BoardCell;
             r_BoardCell.SymbolChanged += r_BoardCell_SymbolChanged;
-            //this.Location = new System.Drawing.Point(13, 13);
-            //this.Name = "Button00";
             this.Size = new System.Drawing.Size(50, 50);
             this.UseVisualStyleBackColor = true;
+        }
+
+        public Position ButtonBoardCellPosition
+        {
+            get
+            {
+                return r_BoardCell.CellPosition;
+            }
         }
 
         private void r_BoardCell_SymbolChanged(BoardCell i_BoardCell)

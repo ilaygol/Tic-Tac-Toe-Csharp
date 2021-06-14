@@ -14,6 +14,7 @@ namespace UserInterface
         {
             s_GameManager = i_GameManager;
             r_CellButtons = new CellButton[s_GameManager.RowSize, s_GameManager.ColSize];
+            s_GameManager.PlayerSwitched += s_GameManager_PlayerSwitched;
             initializeButtons();
             InitializeComponent();
 
@@ -30,6 +31,26 @@ namespace UserInterface
             Player2ScoreLabel.Left = Player2Label.Right + 5;
         }
 
+        private void s_GameManager_PlayerSwitched()
+        {
+            if(Player1Label.Font.Bold == true)
+            {
+                Player1Label.Font = new Font(Player1Label.Font, FontStyle.Regular);
+                Player1ScoreLabel.Font = new Font(Player1ScoreLabel.Font, FontStyle.Regular);
+
+                Player2Label.Font = new Font(Player2Label.Font, FontStyle.Bold);
+                Player2ScoreLabel.Font = new Font(Player2ScoreLabel.Font, FontStyle.Bold);
+            }
+            else
+            {
+                Player1Label.Font = new Font(Player1Label.Font, FontStyle.Bold);
+                Player1ScoreLabel.Font = new Font(Player1ScoreLabel.Font, FontStyle.Bold);
+
+                Player2Label.Font = new Font(Player2Label.Font, FontStyle.Regular);
+                Player2ScoreLabel.Font = new Font(Player2ScoreLabel.Font, FontStyle.Regular);
+            }
+        }
+
         private void initializeButtons()
         {
             int xPosition = 10;
@@ -42,11 +63,25 @@ namespace UserInterface
                     currentButton = new CellButton(s_GameManager.GetBoardCell(new Position(i, j)));
                     currentButton.Location = new Point(xPosition, yPosition);
                     xPosition += currentButton.Width + 10;
+                    currentButton.Click += cellButton_Click;
+                    currentButton.TabStop = false;
                     r_CellButtons[i, j] = currentButton;
                     this.Controls.Add(currentButton);
                 }
+
                 xPosition = 10;
                 yPosition += 60;
+            }
+        }
+        
+        private void cellButton_Click(object sender, EventArgs e)
+        {
+            CellButton currentButton = (sender as CellButton);
+            if(currentButton != null)
+            {
+                s_GameManager.SetPositionOnBoard(currentButton.ButtonBoardCellPosition);
+                currentButton.Enabled = false;
+                s_GameManager.SwitchCurrentPlayer();
             }
         }
     }
