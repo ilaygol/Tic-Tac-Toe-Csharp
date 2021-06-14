@@ -4,17 +4,17 @@ namespace GameLogic
 {
     internal class Board
     {
-        private readonly Position[,] r_PositionsBoard;
+        private readonly BoardCell[,] r_Board;
 
         public Board(int i_RowSize, int i_ColumnSize)
         {
-            r_PositionsBoard = new Position[i_RowSize, i_ColumnSize];
+            r_Board = new BoardCell[i_RowSize, i_ColumnSize];
             InitialBoard();
         }
 
         public Board(int i_SquareSize)
         {
-            r_PositionsBoard = new Position[i_SquareSize, i_SquareSize];
+            r_Board = new BoardCell[i_SquareSize, i_SquareSize];
             InitialBoard();
         }
 
@@ -22,7 +22,7 @@ namespace GameLogic
         {
             get
             {
-                return r_PositionsBoard.Length / ColumnSize;
+                return r_Board.Length / ColumnSize;
             }
         }
 
@@ -30,18 +30,18 @@ namespace GameLogic
         {
             get
             {
-                return r_PositionsBoard.GetUpperBound(1) + 1;
+                return r_Board.GetUpperBound(1) + 1;
             }
         }
 
         public char GetPositionSymbol(ref Position i_Position)
         {
-            return (char)r_PositionsBoard[i_Position.Row, i_Position.Column].Symbol;
+            return r_Board[i_Position.Row, i_Position.Column].Symbol;
         }
 
         public void SetSymbol(ref Position i_Position, char i_Symbol)
         {
-            r_PositionsBoard[i_Position.Row, i_Position.Column].Symbol = i_Symbol;
+            r_Board[i_Position.Row, i_Position.Column].Symbol = i_Symbol;
         }
 
         public void InitialBoard()
@@ -50,7 +50,7 @@ namespace GameLogic
             {
                 for (int j = 0; j < ColumnSize; j++)
                 {
-                    r_PositionsBoard[i, j].SetValues(i, j, ' ');
+                    r_Board[i, j] = new BoardCell(new Position(i, j));
                 }
             }
         }
