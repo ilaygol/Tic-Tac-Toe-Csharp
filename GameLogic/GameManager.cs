@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace B21_Ex02
+namespace GameLogic
 {
     public class GameManager
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace B21_Ex02
+namespace GameLogic
 {
     internal class Board
     {
