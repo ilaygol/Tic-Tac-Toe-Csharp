@@ -70,24 +70,24 @@ namespace GameLogic
         public bool IsGoodPositionChoice(Position i_Position)
         {
             bool isGood = true;
-            if(GameBoard.GetValue(ref i_Position) != ' ')
+            if (GameBoard.GetPositionSymbol(ref i_Position) != ' ')
             {
                 isGood = false;
             }
-            
+
             return isGood;
         }
 
-        public bool SetPositionOnBoard(Position i_Position)
-        {
-            bool isGoodPosition = IsGoodPositionChoice(i_Position);
-            if(isGoodPosition == true)
-            {
-                GameBoard.SetValue(ref i_Position, m_CurrentPlayer.Symbol);
-                m_MovesCount++;
-            }
-            return isGoodPosition;
-        }
+        //public bool SetPositionOnBoard(Position i_Position)
+        //{
+        //    bool isGoodPosition = IsGoodPositionChoice(i_Position);
+        //    if(isGoodPosition == true)
+        //    {
+        //        GameBoard.SetValue(ref i_Position, m_CurrentPlayer.Symbol);
+        //        m_MovesCount++;
+        //    }
+        //    return isGoodPosition;
+        //}
 
         public Position? GetComputerPositionChoice()
         {
@@ -109,7 +109,7 @@ namespace GameLogic
             {
                 for(int j = 0; j < GameBoard.ColumnSize; j++)
                 {
-                    currentPosition.SetValues(i, j);
+                    currentPosition.SetLocation(i, j);
                     if(IsGoodPositionChoice(currentPosition))
                     {
                         positionList.Add(currentPosition);
@@ -154,7 +154,7 @@ namespace GameLogic
             for(int i = 0; i < GameBoard.ColumnSize; i++)
             {
                 tempPosition.Column = i;
-                if(GameBoard.GetValue(ref tempPosition) != symbol)
+                if(GameBoard.GetPositionSymbol(ref tempPosition) != symbol)
                 {
                     isFull = false;
                     break;
@@ -171,7 +171,7 @@ namespace GameLogic
             for (int i = 0; i < GameBoard.RowSize; i++)
             {
                 tempPosition.Row = i;
-                if (GameBoard.GetValue(ref tempPosition) != symbol)
+                if (GameBoard.GetPositionSymbol(ref tempPosition) != symbol)
                 {
                     isFull = false;
                     break;
@@ -189,8 +189,8 @@ namespace GameLogic
             //check main slant
             for(int i = 0; i < GameBoard.RowSize; i++)
             {
-                tempPosition.SetValues(i, i);
-                if (GameBoard.GetValue(ref tempPosition) != symbol)
+                tempPosition.SetLocation(i, i);
+                if (GameBoard.GetPositionSymbol(ref tempPosition) != symbol)
                 {
                     isFullMain = false;
                     break;
@@ -200,8 +200,8 @@ namespace GameLogic
             //check second slant
             for(int i = GameBoard.RowSize - 1; i >= 0; i--)
             {
-                tempPosition.SetValues(i, GameBoard.RowSize - 1 - i);
-                if (GameBoard.GetValue(ref tempPosition) != symbol)
+                tempPosition.SetLocation(i, GameBoard.RowSize - 1 - i);
+                if (GameBoard.GetPositionSymbol(ref tempPosition) != symbol)
                 {
                     isFullSecond = false;
                     break;
