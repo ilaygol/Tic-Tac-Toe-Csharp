@@ -37,10 +37,10 @@ namespace UserInterface
             // 
             // Player1Label
             // 
-            this.Player1Label.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Player1Label.AutoSize = true;
+            this.Player1Label.BackColor = System.Drawing.SystemColors.Control;
             this.Player1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Player1Label.Location = new System.Drawing.Point(124, 254);
+            this.Player1Label.Location = new System.Drawing.Point(66, 250);
             this.Player1Label.Name = "Player1Label";
             this.Player1Label.Size = new System.Drawing.Size(73, 17);
             this.Player1Label.TabIndex = 0;
@@ -49,9 +49,10 @@ namespace UserInterface
             // 
             // Player1ScoreLabel
             // 
-            this.Player1ScoreLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Player1ScoreLabel.AutoSize = true;
+            this.Player1ScoreLabel.BackColor = System.Drawing.SystemColors.Control;
             this.Player1ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Player1ScoreLabel.Location = new System.Drawing.Point(203, 254);
+            this.Player1ScoreLabel.Location = new System.Drawing.Point(145, 250);
             this.Player1ScoreLabel.Name = "Player1ScoreLabel";
             this.Player1ScoreLabel.Size = new System.Drawing.Size(17, 17);
             this.Player1ScoreLabel.TabIndex = 1;
@@ -60,9 +61,10 @@ namespace UserInterface
             // 
             // Player2ScoreLabel
             // 
-            this.Player2ScoreLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Player2ScoreLabel.AutoSize = true;
+            this.Player2ScoreLabel.BackColor = System.Drawing.SystemColors.Control;
             this.Player2ScoreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Player2ScoreLabel.Location = new System.Drawing.Point(392, 254);
+            this.Player2ScoreLabel.Location = new System.Drawing.Point(334, 250);
             this.Player2ScoreLabel.Name = "Player2ScoreLabel";
             this.Player2ScoreLabel.Size = new System.Drawing.Size(16, 17);
             this.Player2ScoreLabel.TabIndex = 3;
@@ -71,10 +73,10 @@ namespace UserInterface
             // 
             // Player2Label
             // 
-            this.Player2Label.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Player2Label.AutoSize = true;
+            this.Player2Label.BackColor = System.Drawing.SystemColors.Control;
             this.Player2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Player2Label.Location = new System.Drawing.Point(322, 254);
+            this.Player2Label.Location = new System.Drawing.Point(264, 250);
             this.Player2Label.Name = "Player2Label";
             this.Player2Label.Size = new System.Drawing.Size(64, 17);
             this.Player2Label.TabIndex = 2;
@@ -83,13 +85,12 @@ namespace UserInterface
             // 
             // GameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 289);
+            this.ClientSize = new System.Drawing.Size(456, 311);
             this.Controls.Add(this.Player2ScoreLabel);
             this.Controls.Add(this.Player2Label);
             this.Controls.Add(this.Player1ScoreLabel);
             this.Controls.Add(this.Player1Label);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TicTacToeMisere";

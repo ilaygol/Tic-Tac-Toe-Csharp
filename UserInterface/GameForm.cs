@@ -21,12 +21,27 @@ namespace UserInterface
             s_GameManager.Player1.ScoreChanged += Player1_ScoreChanged;
             s_GameManager.Player2.ScoreChanged += Player2_ScoreChanged;
 
-            this.Height = r_CellButtons[s_GameManager.RowSize - 1, 0].Bottom + 80;
             Player1Label.Text = s_GameManager.Player1.Name + ':';
-            Player1ScoreLabel.Left = Player1Label.Right + 5;
-
-            Player2Label.Left = Player1ScoreLabel.Right + 20;
             Player2Label.Text = s_GameManager.Player2.Name + ':';
+
+            alignComponents();
+        }
+
+        private void alignComponents()
+        {
+            CellButton lastButton = r_CellButtons[s_GameManager.RowSize - 1, s_GameManager.ColSize - 1];
+            int clientSizeWidth = s_GameManager.ColSize * (lastButton.Width + 10) + 10;
+            int clientSizeHeight = s_GameManager.RowSize * (lastButton.Height + 10) + 20 + Player1Label.Height + 20;
+            this.ClientSize = new Size(clientSizeWidth, clientSizeHeight);
+
+            Player1Label.Top = lastButton.Bottom + 20;
+            Player1ScoreLabel.Top = Player1Label.Top;
+            Player2Label.Top = Player1Label.Top;
+            Player2ScoreLabel.Top = Player1Label.Top;
+
+            Player1ScoreLabel.Left = (this.ClientSize.Width / 2) - Player1ScoreLabel.Width - 10;
+            Player1Label.Left = Player1ScoreLabel.Left - 5 - Player1Label.Width;
+            Player2Label.Left = this.ClientSize.Width / 2 + 10;
             Player2ScoreLabel.Left = Player2Label.Right + 5;
         }
 
