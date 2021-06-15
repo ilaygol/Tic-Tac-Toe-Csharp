@@ -90,7 +90,7 @@ namespace UserInterface
             this.Controls.Add(this.Player2Label);
             this.Controls.Add(this.Player1ScoreLabel);
             this.Controls.Add(this.Player1Label);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TicTacToeMisere";
