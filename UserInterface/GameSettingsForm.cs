@@ -39,9 +39,16 @@ namespace UserInterface
             get
             {
                 string player2Name = "Computer";
-                if(Player2CheckBox.Checked == true)
+                if(Player2CheckBox.Checked)
                 {
-                    player2Name = Player2TextBox.Text;
+                    if(Player2TextBox.Text != "")
+                    {
+                        player2Name = Player2TextBox.Text;
+                    }
+                    else
+                    {
+                        player2Name = "Player 2";
+                    }
                 }
                 return player2Name;
             }
@@ -60,7 +67,11 @@ namespace UserInterface
         private void Player2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             Player2TextBox.Enabled = Player2CheckBox.Checked;
-            if(Player2CheckBox.Checked == false)
+            if(Player2CheckBox.Checked)
+            {
+                Player2TextBox.Text = "";
+            }
+            else
             {
                 Player2TextBox.Text = @"[Computer]";
             }
