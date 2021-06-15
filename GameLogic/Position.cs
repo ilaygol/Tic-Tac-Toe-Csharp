@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GameLogic
+﻿namespace GameLogic
 {
     public struct Position
     {
@@ -42,12 +39,6 @@ namespace GameLogic
         {
             Row = i_Row;
             Column = i_Column;
-        }
-
-        public void DecValues()
-        {
-            Row--;
-            Column--;
         }
     }
 }

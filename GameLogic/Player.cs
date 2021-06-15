@@ -61,9 +61,9 @@ namespace GameLogic
             }
         }
 
-        protected virtual void OnScoreChanged(int i_Obj)
+        protected virtual void OnScoreChanged(int i_Score)
         {
-            ScoreChanged?.Invoke(i_Obj);
+            ScoreChanged?.Invoke(i_Score);
         }
     }
 }

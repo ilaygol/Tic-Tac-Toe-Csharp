@@ -18,8 +18,8 @@ namespace UserInterface
             initializeButtons();
             InitializeComponent();
 
-            s_GameManager.Player1.ScoreChanged += Player1_ScoreChanged;
-            s_GameManager.Player2.ScoreChanged += Player2_ScoreChanged;
+            s_GameManager.Player1.ScoreChanged += player1_ScoreChanged;
+            s_GameManager.Player2.ScoreChanged += player2_ScoreChanged;
 
             Player1Label.Text = s_GameManager.Player1.Name + ':';
             Player2Label.Text = s_GameManager.Player2.Name + ':';
@@ -45,14 +45,14 @@ namespace UserInterface
             Player2ScoreLabel.Left = Player2Label.Right + 5;
         }
 
-        private void Player2_ScoreChanged(int obj)
+        private void player2_ScoreChanged(int i_Score)
         {
-            Player2ScoreLabel.Text = obj.ToString();
+            Player2ScoreLabel.Text = i_Score.ToString();
         }
 
-        private void Player1_ScoreChanged(int obj)
+        private void player1_ScoreChanged(int i_Score)
         {
-            Player1ScoreLabel.Text = obj.ToString();
+            Player1ScoreLabel.Text = i_Score.ToString();
         }
 
         private void s_GameManager_PlayerSwitched()

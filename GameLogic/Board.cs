@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameLogic
+﻿namespace GameLogic
 {
     internal class Board
     {
@@ -9,12 +7,6 @@ namespace GameLogic
         public Board(int i_RowSize, int i_ColumnSize)
         {
             r_Board = new BoardCell[i_RowSize, i_ColumnSize];
-            InitialBoard();
-        }
-
-        public Board(int i_SquareSize)
-        {
-            r_Board = new BoardCell[i_SquareSize, i_SquareSize];
             InitialBoard();
         }
 
