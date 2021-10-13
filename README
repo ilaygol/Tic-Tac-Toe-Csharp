@@ -1,0 +1,3 @@
+The program is a Windows Forms Tic Tac Toe game, developed using C#.
+While playing, the player can set the board size as he desires,
+and choose whether to play against another player or the computer.
